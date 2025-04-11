@@ -14,16 +14,25 @@ const CoinPage = () => {
 
   const { currency, symbol } = CryptoState();
 
-  const fetchCoin = async () => {
-    const { data } = await axios.get(SingleCoin(id));
+  // const fetchCoin = async () => {
+  //   const { data } = await axios.get(SingleCoin(id));
 
-    setCoin(data);
-  };
+  //   setCoin(data);
+  // };
+
+  // useEffect(() => {
+  //   fetchCoin();
+    
+  // }, [fetchCoin]);
 
   useEffect(() => {
+    const fetchCoin = async () => {
+      const { data } = await axios.get(SingleCoin(id));
+      setCoin(data);
+    };
+
     fetchCoin();
-    
-  }, [fetchCoin]);
+  }, [id]);
 
   const useStyles = makeStyles((theme) => ({
     container: {
