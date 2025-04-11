@@ -61,11 +61,25 @@ export default function CoinsTable() {
     },
   });
 
+  // const fetchCoins = async () => {
+  //   setLoading(true);
+  //   const { data } = await axios.get(CoinList(currency));
+  //   console.log(data);
+
+  //   setCoins(data);
+  //   setLoading(false);
+  // };
+
+  // useEffect(() => {
+  //   fetchCoins();
+  // }, [currency]);
+
+
+
+
   const fetchCoins = async () => {
     setLoading(true);
     const { data } = await axios.get(CoinList(currency));
-    console.log(data);
-
     setCoins(data);
     setLoading(false);
   };
@@ -74,6 +88,7 @@ export default function CoinsTable() {
     fetchCoins();
   }, [currency]);
 
+  
   const handleSearch = () => {
     return coins.filter(
       (coin) =>

@@ -60,16 +60,27 @@ const CoinInfo = ({ coin }) => {
   const [flag, setFlag] = useState(false);
   const classes = useStyles();
 
-  const fetchHistoricData = async () => {
-    const { data } = await axios.get(HistoricalChart(coin.id, days, currency));
-    setFlag(true);
-    setHistoricData(data.prices);
-  };
+  // const fetchHistoricData = async () => {
+  //   const { data } = await axios.get(HistoricalChart(coin.id, days, currency));
+  //   setFlag(true);
+  //   setHistoricData(data.prices);
+  // };
+
+  // useEffect(() => {
+  //   fetchHistoricData();
+   
+  // }, [days]);
+
 
   useEffect(() => {
+    const fetchHistoricData = async () => {
+      const { data } = await axios.get(HistoricalChart(coin.id, days, currency));
+      setFlag(true);
+      setHistoricData(data.prices);
+    };
+  
     fetchHistoricData();
-   
-  }, [days]);
+  }, [coin.id, days, currency]);
 
   const darkTheme = createTheme({
     palette: {
