@@ -485,9 +485,9 @@ import {
   Paper,
 } from "@material-ui/core";
 import axios from "axios";
-import { CoinList } from "../config/api"; // Make sure this returns the correct API endpoint for a currency
+import { CoinList } from "../config/api";
 import { useHistory } from "react-router-dom";
-import { CryptoState } from "../CryptoContext"; // Ensure you have a CryptoContext providing `currency` and `symbol`
+import { CryptoState } from "../CryptoContext";
 
 export function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -506,6 +506,9 @@ const useStyles = makeStyles({
     "& .MuiPaginationItem-root": {
       color: "gold",
     },
+    padding: 20,
+    display: "flex",
+    justifyContent: "center",
   },
 });
 
@@ -577,14 +580,13 @@ export default function CoinsTable() {
                         fontFamily: "Montserrat",
                       }}
                       key={head}
-                      align={head === "Coin" ? "" : "right"}
+                      align={head === "Coin" ? "left" : "right"}
                     >
                       {head}
                     </TableCell>
                   ))}
                 </TableRow>
               </TableHead>
-
               <TableBody>
                 {handleSearch()
                   .slice((page - 1) * 10, (page - 1) * 10 + 10)
@@ -662,13 +664,7 @@ export default function CoinsTable() {
             setPage(value);
             window.scroll(0, 450);
           }}
-          style={{
-            padding: 20,
-            width: "100%",
-            display: "flex",
-            justifyContent: "center",
-          }}
-          classes={{ ul: classes.pagination }}
+          className={classes.pagination}
         />
       </Container>
     </ThemeProvider>
