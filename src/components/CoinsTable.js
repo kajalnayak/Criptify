@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Pagination from "@material-ui/lab/Pagination";
 import {
@@ -17,6 +17,7 @@ import {
   Paper,
 } from "@material-ui/core";
 import axios from "axios";
+//import { CoinList } from "../config/api";
 import { CoinList } from "../config/api";
 import { useHistory } from "react-router-dom";
 import { CryptoState } from "../CryptoContext";
@@ -77,17 +78,28 @@ export default function CoinsTable() {
 
 
 
-  const fetchCoins = async () => {
+  // const fetchCoins = async () => {
+  //   setLoading(true);
+  //   const { data } = await axios.get(CoinList(currency));
+  //   setCoins(data);
+  //   setLoading(false);
+  // };
+
+  // useEffect(() => {
+  //   fetchCoins();
+  // }, [currency]);
+  const fetchCoins = useCallback(async () => {
     setLoading(true);
     const { data } = await axios.get(CoinList(currency));
     setCoins(data);
     setLoading(false);
-  };
-
-  useEffect(() => {
-    fetchCoins();
   }, [currency]);
 
+  
+  useEffect(() => {
+    fetchCoins();
+  }, [fetchCoins]);
+  
 
   const handleSearch = () => {
     return coins.filter(
